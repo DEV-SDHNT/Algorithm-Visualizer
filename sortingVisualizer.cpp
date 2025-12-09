@@ -8,10 +8,9 @@
 
 using namespace std;
 
-const int SCREEN_WIDTH=900;
-const int SCREEN_HEIGHT=600;
-
-const int NUM_BARS=150;
+const int SCREEN_WIDTH=1200;
+const int SCREEN_HEIGHT=700;
+const int NUM_BARS=100;
 
 void DrawBars(const vector<int>& arr, int highlight1=-1,int highlight2=-1){
   int barWidth=SCREEN_WIDTH/NUM_BARS;
@@ -29,9 +28,6 @@ void DrawBars(const vector<int>& arr, int highlight1=-1,int highlight2=-1){
     DrawRectangle(i*barWidth,SCREEN_HEIGHT-height+20,barWidth-1,height,color);
   }
 }
-void DrawBlocks(const vector<int>& arr){
-  
-}
 
 // Algorithms ------------------------------------------------------------
 
@@ -46,7 +42,7 @@ void BubbleSort(vector<int>& arr){
         DrawText("Bubble Sort", 20, 10, 20, GREEN);
         DrawBars(arr,j+1,j);
         swap(arr[j],arr[j+1]);
-        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(1));
       }
       EndDrawing();
     }
@@ -66,17 +62,11 @@ void InsertionSort(vector<int>& array){
       DrawBars(array,j-1,j);
       array[j+1]=array[j];
       j--;
-      this_thread::sleep_for(chrono::milliseconds(10));
+      this_thread::sleep_for(chrono::milliseconds(6));
       EndDrawing();
     }
     array[j+1]=temp;
   }
-}
-// Custom Sort ---------------------------------------------------
-
-void CustomSort(vector<int>& array){
- 
-  
 }
 
 // Selection sort ------------------------------------------------
@@ -92,10 +82,10 @@ void selectionSort(vector<int>& array) {
     }
     swap(array[i],array[min]);
     ClearBackground(BLACK);
-    DrawText("Selection Sort", 20 , 10, 20, GREEN);
     DrawBars(array,i,min);
+    DrawText("Selection Sort", 20 , 10, 20, GREEN);
+    this_thread::sleep_for(chrono::milliseconds(100));
     EndDrawing();
-    this_thread::sleep_for(chrono::milliseconds(10));
   }
 }
 
@@ -120,29 +110,24 @@ void merger(vector<int>& array,int l, int mid,int r){
 
   int i=0,j=0,k=l;
   while(i<n1 && j<n2){
-    ClearBackground(BLACK);
     if(L[i]<=R[j]){
-      DrawBars(array,k,i);
       array[k++]=L[i++];
     }
     else{
-      DrawBars(array,k,j);
       array[k++]=R[j++];
     }
   }
   while(i<n1){
-    ClearBackground(BLACK);
-    DrawBars(array,k,i);
     array[k++]=L[i++];
   }
   while(j<n2){
-    ClearBackground(BLACK);
-    DrawBars(array,k,j);
     array[k++]=R[j++];
   }
+  ClearBackground(BLACK);
+  DrawBars(array,k,k-j);
   DrawText("Merge Sort", 20 , 10, 20, GREEN);
   EndDrawing();
-  this_thread::sleep_for(chrono::milliseconds(10));
+  this_thread::sleep_for(chrono::milliseconds(100));
 }
 
 void mergeSort(vector<int>& array,int first,int last){
@@ -169,15 +154,13 @@ int partition(vector<int>& array, int start, int end){
     if(array[j]<pivot){
       i++;
       swap(array[i],array[j]);
-      ClearBackground(BLACK);
-      DrawBars(array,i,j);
     }
   }
   i++;
   swap(array[i],array[end]);
   ClearBackground(BLACK);
   DrawBars(array,i,end);
-  this_thread::sleep_for(chrono::milliseconds(10));
+  this_thread::sleep_for(chrono::milliseconds(100));
   EndDrawing();
   return i;
 }
@@ -246,13 +229,7 @@ int main(void) {
     }
     else if(IsKeyPressed(KEY_W)){
       CloseWindow();
-    }
-    else if(IsKeyPressed(KEY_C)){
-      Randomize(arr);
-      this_thread::sleep_for(chrono::milliseconds(10));
-      CustomSort(arr);
-    }
-    
+    }    
   }
   CloseWindow();
  
