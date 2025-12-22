@@ -1,5 +1,5 @@
 # Algorithm Visualizer
-- Nothing just studing DSA & building this visualizers as a small project.
+- Just studying DSA & building this visualizers as a small project.
 
 ## Sorting Visualizer Added-(C++,Raylib)
 - Bubble Sort
